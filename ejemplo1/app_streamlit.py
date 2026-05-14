@@ -13,8 +13,9 @@ saludos = session.query(Saludo).all()
 # Mostrar con Streamlit
 st.title("Presentación de todos los Saludos")
 
-for saludo  in saludos:
-    st.write(saludo)
+for saludo in saludos:
+    mensaje = str(saludo).replace("-", " ").upper()
+    st.write(mensaje)
     st.markdown("---")
 
 st.markdown("---")
@@ -22,7 +23,10 @@ st.title("Presentación de todos los Saludos en Tabla")
 lista = []
 
 for s in saludos:
-    diccionario = {"id": s.id, "mensaje": s.mensaje, "tipo": s.tipo}
+    diccionario = {
+        "MENSAJE": s.mensaje.upper(),
+        "TIPO": s.tipo.upper()
+    }
     lista.append(diccionario)
 
 st.dataframe(lista)
